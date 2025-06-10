@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1D4ED8"
+      "backgroundColor": "#424242"
     },
     "plugins": [
       [
@@ -63,14 +63,14 @@
     },
     "extra": {
       "eas": {
-        "projectId": "be4b16b7-21b9-4d57-8999-e0f350ffc76b"
-      }
+        "projectId": "adicionar o id aqui"
+      },
     },
     "owner": "jamal10",
     "updates": {
       "enabled": true,
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/be4b16b7-21b9-4d57-8999-e0f350ffc76b"
+      "url": "url aqui para o servidor de atualizações"
     },
     "runtimeVersion": {
       "policy": "sdkVersion"

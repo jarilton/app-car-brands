@@ -7,7 +7,7 @@ import { Button } from '../../components/Button'
 
 export const Home = () => {
   return (
-    <View className="flex-1  bg-blue-700">
+    <View className="flex-1 bg-gray-800">
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
