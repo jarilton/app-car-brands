@@ -1,6 +1,9 @@
 import React from 'react'
 
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
+import Toast from 'react-native-toast-message'
+
+import { Button } from '../../components/Button'
 
 export const Home = () => {
   return (
@@ -27,14 +30,18 @@ export const Home = () => {
           </View>
 
           <View>
-            <TouchableOpacity
-              className="bg-white rounded-full px-10 py-3 mb-4"
-              onPress={() => console.log('Navigate to What Need')}
-            >
-              <Text className="text-blue-700 text-lg font-bold">
-                Ver Carros
-              </Text>
-            </TouchableOpacity>
+            <Button
+              title="Ver Carros"
+              onPress={() => {
+                Toast.show({
+                  type: 'success',
+                  text1: 'Carros',
+                  text2: 'Carros clicado com sucesso!',
+                })
+              }}
+              bgColor="bg-blue-800"
+              outlined
+            />
           </View>
         </View>
       </ScrollView>
