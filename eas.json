@@ -1,0 +1,48 @@
+{
+  "cli": {
+    "version": ">= 5.6.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "preview": {
+      "autoIncrement": true,
+      "android": {
+        "distribution": "internal",
+        "autoIncrement": "versionCode",
+        "env": {
+          "EXPO_UPDATES_ENABLED": "true"
+        }
+      },
+      "ios": {
+        "simulator": true,
+        "env": {
+          "EXPO_UPDATES_ENABLED": "true"
+        }
+      },
+      "channel": "preview"
+    },
+    "production": {
+      "autoIncrement": true,
+      "android": {
+        "autoIncrement": "versionCode"
+      },
+      "channel": "production"
+    }
+  },
+  "submit": {
+    "preview": {
+      "android": {
+        "track": "internal",
+        "serviceAccountKeyPath": "./google-services.json",
+        "releaseStatus": "draft"
+      }
+    },
+    "production": {
+      "android": {
+        "track": "production",
+        "serviceAccountKeyPath": "./google-services.json",
+        "releaseStatus": "completed"
+      }
+    }
+  },
+}

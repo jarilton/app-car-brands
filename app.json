@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "App Car Brands",
+    "slug": "appCarBrands",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1D4ED8"
+    },
+    "plugins": [
+      [
+        "expo-updates",
+        {
+          "enabled": true
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "33.0.0",
+            "minSdkVersion": 24,
+            "kotlinVersion": "1.8.10"
+          },
+          "ios": {}
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      "expo-font",
+      "expo-secure-store"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jamal.appCarBrands"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.jamal.appCarBrands",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "versionCode": 9
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "be4b16b7-21b9-4d57-8999-e0f350ffc76b"
+      }
+    },
+    "owner": "jamal10",
+    "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/be4b16b7-21b9-4d57-8999-e0f350ffc76b"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
+  }
+}
