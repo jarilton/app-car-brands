@@ -13,7 +13,6 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  useColorScheme,
   View,
 } from 'react-native'
 import Toast from 'react-native-toast-message'
@@ -22,10 +21,10 @@ import * as yup from 'yup'
 
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
-import { Loading } from '../../components/Loading'
+import { useAuth } from '../../hooks/useAuth'
 
 interface IFormData {
-  email: string
+  user: string
   password: string
 }
 
@@ -42,14 +41,17 @@ export const SignIn = () => {
   const [storageEmail, setStorageEmail] = useState('')
   const [storagePassword, setStoragePassword] = useState('')
 
-  const colorScheme = useColorScheme()
+  const { signIn } = useAuth()
 
   const schema = yup.object({
-    email: yup.string().email('E-mail inválido').required('E-mail obrigatório'),
+    user: yup
+      .string()
+      // .email('E-mail inválido')
+      .required('E-mail obrigatório'),
     password: yup
       .string()
       .required('Senha obrigatória')
-      .min(6, 'Senha deve ter no mínimo 6 caracteres'),
+      .min(3, 'Senha deve ter no mínimo 3 caracteres'),
   })
 
   const { control, handleSubmit, setValue } = useForm<IFormData>({
@@ -65,10 +67,16 @@ export const SignIn = () => {
   // }
 
   const onSubmit = async (data: IFormData) => {
+    console.log('data do login', JSON.stringify(data, null, 2))
     try {
       setLoading(true)
 
       console.log('Dados do formulário:', data)
+
+      await signIn({
+        user: data.user,
+        password: data.password,
+      })
 
       Toast.show({
         type: 'success',
@@ -116,12 +124,12 @@ export const SignIn = () => {
 
   useEffect(() => {
     if (rememberMe && storageEmail) {
-      setValue('email', storageEmail)
+      setValue('user', storageEmail)
       setValue('password', storagePassword)
     }
 
     if (!rememberMe) {
-      setValue('email', '')
+      setValue('user', '')
       setValue('password', '')
     }
   }, [rememberMe, storageEmail, storagePassword, setValue])
@@ -132,10 +140,6 @@ export const SignIn = () => {
     }
     loadRememberMeData()
   }, [])
-
-  if (loading) {
-    return <Loading />
-  }
 
   const logo = require('../../assets/car-red.png')
 
@@ -166,7 +170,7 @@ export const SignIn = () => {
           <View className="p-8 bg-white dark:bg-gray-800">
             <View className="mb-5">
               <Controller
-                name="email"
+                name="user"
                 control={control}
                 render={({
                   field: { onChange, onBlur, value },
@@ -235,13 +239,7 @@ export const SignIn = () => {
                 activeOpacity={0.6}
                 // onPress={handleForgotPassword}
               >
-                <Text
-                  className={`${
-                    colorScheme === 'dark' ? 'text-blue-400' : 'text-blue-800'
-                  }`}
-                >
-                  Esqueceu a senha?
-                </Text>
+                <Text className={`${'text-red-500'}`}>Esqueceu a senha?</Text>
               </TouchableOpacity>
             </View>
 
@@ -249,7 +247,6 @@ export const SignIn = () => {
               <Button
                 title="ENTRAR"
                 onPress={handleSubmit(onSubmit)}
-                loading={loading}
                 text="Entrando... aguarde!"
                 style={{ marginTop: 10 }}
                 disabled={loading}
@@ -266,13 +263,7 @@ export const SignIn = () => {
                 className="ml-2"
                 // onPress={handleSignUp}
               >
-                <Text
-                  className={`${
-                    colorScheme === 'dark' ? 'text-blue-400' : 'text-blue-800'
-                  }`}
-                >
-                  Cadastre-se
-                </Text>
+                <Text className={`${'text-red-500'}`}>Cadastre-se</Text>
               </TouchableOpacity>
             </View>
           </View>

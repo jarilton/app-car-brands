@@ -143,14 +143,16 @@ export const Input: React.FC<InputProps> = ({
           ((isFocused !== undefined && isFocused) ||
             (value !== undefined && value !== '')) && (
             <Animated.Text
-              className={`text-gray-500 text-base absolute top-${translateY} left-[16px] bg-white px-2 z-20`}
+              className={`text-white text-base absolute top-${translateY} left-[16px] bg-gray-800 px-2 z-20`}
             >
               {placeholder}
             </Animated.Text>
           )}
 
         {label && (
-          <Text className={`text-white text-base ${!isRequired ? 'mb-1' : ''}`}>
+          <Text
+            className={`text-gray-200 text-base ${!isRequired ? 'mb-1' : ''}`}
+          >
             {label}
           </Text>
         )}
@@ -164,11 +166,11 @@ export const Input: React.FC<InputProps> = ({
             options={{
               mask,
             }}
-            className={`border-2 bg-white border-gray-200 px-[10px] h-12 rounded-md focus:border-blue-800  ${
+            className={`border-2 text-gray-200 bg-gray-800 border-gray-200 px-[10px] h-12 rounded-md focus:border-red-800  ${
               message ? 'border-red-500' : ''
             }`}
             placeholder={useFloatingLabel && isFocused ? '' : placeholder}
-            placeholderTextColor={colors.gray[300]}
+            placeholderTextColor={colors.gray[200]}
             value={inputText}
             onChangeText={onChangeText}
             onBlur={handleBlur}
@@ -184,7 +186,7 @@ export const Input: React.FC<InputProps> = ({
             className={`
             ${
               noBorder ? 'border-0' : 'border-2'
-            } bg-white  border-gray-200 h-12 rounded-md focus:border-blue-800   ${
+            } text-gray-200 bg-gray-800 border-gray-200 h-12 rounded-md focus:border-red-800   ${
               message && typeToIcon[type]
                 ? 'border-red-500 pl-8'
                 : typeToIcon[type]
@@ -194,7 +196,7 @@ export const Input: React.FC<InputProps> = ({
                 : 'px-[10px]'
             }`}
             placeholder={useFloatingLabel && isFocused ? '' : placeholder}
-            placeholderTextColor={colors.gray[500]}
+            placeholderTextColor={colors.gray[200]}
             value={inputText ? normalizeValue(inputText) : ''}
             onChangeText={onChangeText}
             onBlur={handleBlur}
@@ -226,7 +228,7 @@ export const Input: React.FC<InputProps> = ({
             <Ionicons
               name={showPassword ? 'eye-off' : 'eye'}
               size={20}
-              color={showPassword ? colors.blue[700] : colors.gray[400]}
+              color={showPassword ? colors.blue[800] : colors.gray[400]}
             />
           </View>
         )}
