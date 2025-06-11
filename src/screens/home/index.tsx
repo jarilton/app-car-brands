@@ -1,52 +1,67 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 
-import { ScrollView, Text, View } from 'react-native'
+import { View } from 'react-native'
 import Toast from 'react-native-toast-message'
 
-import { Button } from '../../components/Button'
+import { CarList } from '../../components/CarList'
 import { Header } from '../../components/Header'
+import { Loading } from '../../components/Loading'
+import { apiCars } from '../../services/apiCars'
 
 export const Home = () => {
+  const [brands, setBrands] = React.useState([])
+  const [loading, setLoading] = React.useState(false)
+
+  const getBrands = useCallback(async () => {
+    setLoading(true)
+    try {
+      const { data } = await apiCars.get('/marcas')
+
+      console.log('Brands data:', JSON.stringify(data, null, 2))
+
+      setBrands(data)
+    } catch (error) {
+      console.error('Error fetching brands:', error)
+      Toast.show({
+        type: 'error',
+        text1: 'Error',
+        text2: 'Failed to load car brands.',
+      })
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    getBrands()
+  }, [])
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <Loading />
+      </>
+    )
+  }
+
   return (
     <View className="flex-1 bg-gray-800">
       <Header />
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          justifyContent: 'center',
-        }}
-        showsVerticalScrollIndicator={false}
-        alwaysBounceVertical={false}
-      >
-        <View className="flex-1 justify-center items-center">
-          <View>
-            <Text className="text-white text-2xl mx-10 mt-4 mb-10 text-center">
-              Aplicativo de Carros{' '}
-            </Text>
-          </View>
-
-          <View>
-            <Text className="text-white text-2xl mx-10 mt-4 mb-10 text-center">
-              Tela inicial
-            </Text>
-          </View>
-
-          <View>
-            <Button
-              title="Ver Carros"
-              onPress={() => {
-                Toast.show({
-                  type: 'success',
-                  text1: 'Carros',
-                  text2: 'Carros clicado com sucesso!',
-                })
-              }}
-              bgColor="bg-red-800"
-              outlined
-            />
-          </View>
-        </View>
-      </ScrollView>
+      <View className="flex-1 justify-center items-center">
+        {/* lista de cards para mostrar os carros */}
+        <CarList
+          data={brands}
+          onPress={(brand) => {
+            console.log('Selected brand:', brand)
+            Toast.show({
+              type: 'success',
+              text1: 'Brand Selected',
+              text2: `You selected ${brand.nome}`,
+            })
+          }}
+        />
+      </View>
     </View>
   )
 }
