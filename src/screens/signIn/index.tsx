@@ -11,7 +11,6 @@ import {
   ScrollView,
   Switch,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
@@ -22,6 +21,10 @@ import * as yup from 'yup'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { useAuth } from '../../hooks/useAuth'
+import {
+  storageRememberMeGet,
+  storageRememberMeGetCredentials,
+} from '../../storage/rememberMe/storageRememberMe'
 
 interface IFormData {
   user: string
@@ -58,14 +61,6 @@ export const SignIn = () => {
     resolver: yupResolver(schema),
   })
 
-  // const handleForgotPassword = () => {
-  //   navigation.navigate('forgotPassword')
-  // }
-
-  // const handleSignUp = () => {
-  //   navigation.navigate('signUp')
-  // }
-
   const onSubmit = async (data: IFormData) => {
     console.log('data do login', JSON.stringify(data, null, 2))
     try {
@@ -76,6 +71,7 @@ export const SignIn = () => {
       await signIn({
         user: data.user,
         password: data.password,
+        rememberMe,
       })
 
       Toast.show({
@@ -136,7 +132,16 @@ export const SignIn = () => {
 
   useEffect(() => {
     const loadRememberMeData = async () => {
-      // Aqui você pode carregar os dados de e-mail e senha armazenados
+      const rememberMeOption = await storageRememberMeGet()
+      setRememberMe(rememberMeOption === 'true')
+
+      if (rememberMeOption === 'true') {
+        const { user: savedUser, password: savedPassword } =
+          await storageRememberMeGetCredentials()
+
+        setStorageEmail(savedUser || '')
+        setStoragePassword(savedPassword || '')
+      }
     }
     loadRememberMeData()
   }, [])
@@ -235,36 +240,17 @@ export const SignIn = () => {
                   Lembrar-me
                 </Text>
               </View>
-              <TouchableOpacity
-                activeOpacity={0.6}
-                // onPress={handleForgotPassword}
-              >
-                <Text className={`${'text-red-500'}`}>Esqueceu a senha?</Text>
-              </TouchableOpacity>
             </View>
 
             <View className="mt-5">
               <Button
                 title="ENTRAR"
                 onPress={handleSubmit(onSubmit)}
+                loading={loading}
                 text="Entrando... aguarde!"
                 style={{ marginTop: 10 }}
                 disabled={loading}
-                bgColor="bg-red-800"
               />
-            </View>
-
-            <View className="flex justify-center flex-row mt-5">
-              <Text className="text-gray-900 dark:text-white">
-                Não tem uma conta?
-              </Text>
-              <TouchableOpacity
-                activeOpacity={0.6}
-                className="ml-2"
-                // onPress={handleSignUp}
-              >
-                <Text className={`${'text-red-500'}`}>Cadastre-se</Text>
-              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>

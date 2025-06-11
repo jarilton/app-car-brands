@@ -16,7 +16,7 @@ module.exports = {
         "modal-bg": "rgba(0, 0, 0, 0.8)",
       },
       backgroundColor: {
-        'blue-gradient': 'linear-gradient(to bottom, #2271E8 0%, #134082 100%)',
+        "red-gradient": "linear-gradient(90deg, #ff0000 0%, #ff7f00 100%)",
       },
     },
   },

@@ -228,7 +228,7 @@ export const Input: React.FC<InputProps> = ({
             <Ionicons
               name={showPassword ? 'eye-off' : 'eye'}
               size={20}
-              color={showPassword ? colors.blue[800] : colors.gray[400]}
+              color={showPassword ? colors.red[800] : colors.gray[400]}
             />
           </View>
         )}

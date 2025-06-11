@@ -4,10 +4,12 @@ import { ScrollView, Text, View } from 'react-native'
 import Toast from 'react-native-toast-message'
 
 import { Button } from '../../components/Button'
+import { Header } from '../../components/Header'
 
 export const Home = () => {
   return (
     <View className="flex-1 bg-gray-800">
+      <Header />
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
@@ -39,7 +41,7 @@ export const Home = () => {
                   text2: 'Carros clicado com sucesso!',
                 })
               }}
-              bgColor="bg-blue-800"
+              bgColor="bg-red-800"
               outlined
             />
           </View>

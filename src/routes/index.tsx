@@ -15,7 +15,7 @@ export const Routes = () => {
   console.log('Routes component token:', token)
 
   return (
-    <View className="flex-1 bg-blue-700">
+    <View className="flex-1 bg-red-800">
       <NavigationContainer>
         {token && isAuthenticated ? <AppRoutes /> : <AuthRoutes />}
       </NavigationContainer>

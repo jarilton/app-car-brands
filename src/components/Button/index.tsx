@@ -57,14 +57,14 @@ export const Button = ({
         testID="test-id-for-disabled-button"
         className={`${
           outlined
-            ? 'bg-gray-800 border-blue-800 dark:border-white border-2 h-[50px] items-center justify-center rounded-lg'
+            ? 'bg-gray-800 border-red-800 dark:border-white border-2 h-[50px] items-center justify-center rounded-lg'
             : `${
-                bgColor || 'bg-blue-800'
+                bgColor || 'bg-red-800'
               } h-[50px] items-center justify-center rounded-lg`
         } ${loading || disabled ? 'opacity-50' : ''} w-full`}
         onPress={onPress}
         disabled={disabled || loading}
-        style={outlined ? {} : { backgroundColor: bgColor || colors.blue[800] }}
+        style={outlined ? {} : { backgroundColor: bgColor || colors.red[800] }}
         {...rest}
       >
         {loading && text ? (
@@ -82,13 +82,13 @@ export const Button = ({
               <FontAwesomeIcon
                 icon={icon}
                 size={24}
-                color={outlined ? colors.blue[800] : colors.white}
+                color={outlined ? colors.red[800] : colors.white}
               />
             )}
             <Text
               testID="test-id-for-outlined-button"
               className={`${
-                outlined ? 'text-blue-800 dark:text-white' : 'text-white'
+                outlined ? 'text-red-800 dark:text-white' : 'text-white'
               } text-lg font-bold p-2`}
             >
               {title}
