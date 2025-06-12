@@ -3,7 +3,6 @@ import React from 'react'
 import { Feather } from '@expo/vector-icons'
 import { faCar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-// import { useNavigation } from '@react-navigation/native'
 import { Text, TouchableOpacity, View } from 'react-native'
 import colors from 'tailwindcss/colors'
 
@@ -23,7 +22,14 @@ export const Header: React.FC<HeaderProps> = ({ onBack }) => {
     <View className="w-full h-[120px] bg-red-800" testID="header-component">
       <View className="px-2 flex-row justify-between items-center mt-[67px]">
         <View className="flex-row items-center p-2">
-          <FontAwesomeIcon icon={faCar} color={colors.white} size={24} />
+          {/* se for a tela home mostrar o icone de carro, caso contrário mostrar o icone de voltar */}
+          {onBack ? (
+            <TouchableOpacity onPress={onBack}>
+              <Feather name="arrow-left" size={24} color={colors.white} />
+            </TouchableOpacity>
+          ) : (
+            <FontAwesomeIcon icon={faCar} size={24} color={colors.white} />
+          )}
         </View>
 
         <View className="flex-row items-center">

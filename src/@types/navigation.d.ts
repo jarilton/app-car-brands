@@ -1,7 +1,13 @@
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
-      home: undefined
+      carBrands: undefined
+      carModels: {
+        brand: {
+          codigo: string
+          nome: string
+        }
+      }
     }
   }
 }

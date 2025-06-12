@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 
-import { View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { Text, View } from 'react-native'
 import Toast from 'react-native-toast-message'
 
 import { CarList } from '../../components/CarList'
@@ -8,16 +9,27 @@ import { Header } from '../../components/Header'
 import { Loading } from '../../components/Loading'
 import { apiCars } from '../../services/apiCars'
 
-export const Home = () => {
+type CarBrand = {
+  codigo: string
+  nome: string
+}
+
+export const CarBrands = () => {
   const [brands, setBrands] = React.useState([])
   const [loading, setLoading] = React.useState(false)
+
+  const navigation = useNavigation()
+
+  const handleCarModels = useCallback((brand: CarBrand) => {
+    navigation.navigate('carModels', {
+      brand,
+    })
+  }, [])
 
   const getBrands = useCallback(async () => {
     setLoading(true)
     try {
       const { data } = await apiCars.get('/marcas')
-
-      console.log('Brands data:', JSON.stringify(data, null, 2))
 
       setBrands(data)
     } catch (error) {
@@ -48,17 +60,14 @@ export const Home = () => {
   return (
     <View className="flex-1 bg-gray-800">
       <Header />
+      <View className="p-4">
+        <Text className="text-white text-2xl mb-4">Marcas de Veículos</Text>
+      </View>
       <View className="flex-1 justify-center items-center">
-        {/* lista de cards para mostrar os carros */}
         <CarList
           data={brands}
           onPress={(brand) => {
-            console.log('Selected brand:', brand)
-            Toast.show({
-              type: 'success',
-              text1: 'Brand Selected',
-              text2: `You selected ${brand.nome}`,
-            })
+            handleCarModels(brand)
           }}
         />
       </View>

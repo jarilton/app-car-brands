@@ -2,6 +2,7 @@ import React from 'react'
 
 import { FlatList, Image, Text, TouchableOpacity } from 'react-native'
 
+import defaultLogo from '../../assets/sem-imagem.jpeg'
 import { logoCars } from '../../utils/logoCars'
 import { Loading } from '../Loading'
 
@@ -23,7 +24,7 @@ const formatLogoUrl = (nome: string) => {
     .filter(Boolean)
     .map((s) => s.replace(/.*-/, '').trim())[0]
 
-  return logoCars[key] ?? 'https://via.placeholder.com/100?text=Logo'
+  return logoCars[key]
 }
 
 export const CarList: React.FC<ListCarsProps> = ({ data, onPress }) => {
@@ -34,25 +35,28 @@ export const CarList: React.FC<ListCarsProps> = ({ data, onPress }) => {
       keyExtractor={(item) => item.codigo}
       contentContainerStyle={{ padding: 10 }}
       columnWrapperStyle={{ justifyContent: 'space-between' }}
-      renderItem={({ item }) => (
-        <TouchableOpacity
-          className="w-[48%] bg-white rounded-2xl p-4 mb-4 shadow-md items-center"
-          onPress={() => onPress?.(item)}
-        >
-          {!item.nome ? (
-            <Loading />
-          ) : (
-            <Image
-              source={{ uri: formatLogoUrl(item.nome) }}
-              className="w-16 h-16 mb-2"
-              style={{ resizeMode: 'contain' }}
-            />
-          )}
-          <Text className="text-center text-base font-semibold">
-            {item.nome}
-          </Text>
-        </TouchableOpacity>
-      )}
+      renderItem={({ item }) => {
+        const logoUri = formatLogoUrl(item.nome)
+        return (
+          <TouchableOpacity
+            className="w-[48%] bg-white rounded-2xl p-4 mb-4 shadow-md items-center"
+            onPress={() => onPress?.(item)}
+          >
+            {!item.nome ? (
+              <Loading />
+            ) : (
+              <Image
+                source={logoUri ? { uri: logoUri } : defaultLogo}
+                className="w-16 h-16 mb-2"
+                style={{ resizeMode: 'contain' }}
+              />
+            )}
+            <Text className="text-center text-base font-semibold">
+              {item.nome}
+            </Text>
+          </TouchableOpacity>
+        )
+      }}
     />
   )
 }
