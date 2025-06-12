@@ -168,11 +168,11 @@ export const SignIn = () => {
               resizeMode="contain"
             />
 
-            <Text className="text-gray-800 dark:text-white font-bold text-[23px]">
+            <Text className="text-white font-bold text-[23px]">
               Acesse sua conta
             </Text>
           </View>
-          <View className="p-8 bg-white dark:bg-gray-800">
+          <View className="p-8 bg-gray-800">
             <View className="mb-5">
               <Controller
                 name="user"
@@ -233,7 +233,7 @@ export const SignIn = () => {
                   ios_backgroundColor="#3e3e3e"
                 />
                 <Text
-                  className={`${'text-gray-900 dark:text-white '} ${
+                  className={`${'text-white '} ${
                     Platform.OS === 'ios' ? 'ml-2' : 0
                   }`}
                 >

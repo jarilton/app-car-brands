@@ -57,7 +57,7 @@ export const Button = ({
         testID="test-id-for-disabled-button"
         className={`${
           outlined
-            ? 'bg-gray-800 border-red-800 dark:border-white border-2 h-[50px] items-center justify-center rounded-lg'
+            ? 'bg-gray-800 border-red-800 border-2 h-[50px] items-center justify-center rounded-lg'
             : `${
                 bgColor || 'bg-red-800'
               } h-[50px] items-center justify-center rounded-lg`
@@ -88,7 +88,7 @@ export const Button = ({
             <Text
               testID="test-id-for-outlined-button"
               className={`${
-                outlined ? 'text-red-800 dark:text-white' : 'text-white'
+                outlined ? 'text-white' : 'text-white'
               } text-lg font-bold p-2`}
             >
               {title}

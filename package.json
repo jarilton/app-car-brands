@@ -10,7 +10,7 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "clean": "sudo rm -r ./node_modules && sudo rm yarn.lock",
-    "clean:all": "sudo rm -r ./node_modules && sudo rm yarn.lock && sudo rm -r ./ios/Pods && sudo rm -r ./ios/Podfile.lock && sudo rm -r ./android/.gradle && sudo rm -r ./android/app/build",
+    "clean:all": "sudo rm -r ./node_modules && sudo rm yarn.lock && sudo rm -r ./android ./ios",
     "prettier:write": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json}",
     "lint": "eslint src --ext .ts,.tsx --fix",
     "prepare": "husky install",
